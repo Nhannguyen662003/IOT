@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Nước Tự Động</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tint"></i> Hệ Thống Nước Tự Động</h1>
+            <p class="subtitle">Giám sát và điều khiển hệ thống nước thông minh</p>
+        </header>
+        
+        <div class="dashboard">
+            <!-- Cảm biến người -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-user"></i>
+                    <div class="card-title">Cảm Biến Người</div>
+                </div>
+                <div class="status-value" id="person-status">Đang tải...</div>
+                <div class="status-value" id="person-distance">- cm</div>
+                <div class="water-info">
+                    <div class="water-info-item">
+                        <div class="water-info-label">Khoảng cách</div>
+                        <div class="water-info-value" id="person-distance-value">0 cm</div>
+                    </div>
+                    <div class="water-info-item">
+                        <div class="water-info-label">Trạng thái</div>
+                        <div class="water-info-value" id="person-detection-status">---</div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Trạng thái vòi nước -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-faucet"></i>
+                    <div class="card-title">Điều Khiển Vòi Nước</div>
+                </div>
+                <div class="status-value" id="valve-status">Đang tải...</div>
+                <div class="controls">
+                    <button id="valve-on" class="btn-success">
+                        <i class="fas fa-faucet"></i> Mở Vòi
+                    </button>
+                    <button id="valve-off" class="btn-danger">
+                        <i class="fas fa-stop"></i> Đóng Vòi
+                    </button>
+
+                </div>
+                <div class="flow-status" id="flow-status">Đang tải...</div>
+                <div class="water-info">
+                    <div class="water-info-item">
+                        <div class="water-info-label">Tốc độ nước</div>
+                        <div class="water-info-value" id="water-speed-value">0 cm/s</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mực nước bồn -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-water"></i>
+                    <div class="card-title">Mực Nước Bồn Chứa</div>
+                </div>
+                <div class="tank-container">
+                    <div class="tank-water" id="tank-water" style="height: 0%"></div>
+                    <div class="tank-level" id="tank-level">0%</div>
+                    <div class="tank-measurement">
+                        
+                        <div class="tank-mark">20 cm</div>
+                        <div class="tank-mark">15 cm</div>
+                        <div class="tank-mark">10 cm</div>
+                        <div class="tank-mark">5 cm</div>
+                        <div class="tank-mark">0 cm</div>
+                    </div>
+                </div>
+                <div class="status-value" id="tank-status">Đang tải...</div>
+                <div class="water-info">
+                    <div class="water-info-item">
+                        <div class="water-info-label">Mức nước</div>
+                        <div class="water-info-value" id="water-level-value">0 cm</div>
+                    </div>
+                    <div class="water-info-item">
+                        <div class="water-info-label">Khoảng cách</div>
+                        <div class="water-info-value" id="tank-distance-value">0 cm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Kết nối và nhật ký -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-list-alt"></i>
+                <div class="card-title">Nhật Ký Hệ Thống</div>
+            </div>
+            <div class="connection-status">
+                <div class="loading" id="connection-loading"></div>
+                <span class="status-indicator" id="connection-indicator"></span>
+                <span id="connection-text">Đang kết nối MQTT...</span>
+            </div>
+            <div class="logs-container" id="logs-container">
+                <!-- Nhật ký sẽ được thêm ở đây -->
+            </div>
+        </div>
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-list-alt"></i>
+                <div class="card-title">QR web</div>
+            </div>
+            <div class="connection-status">
+                <a> <img src="https://i.pinimg.com/originals/40/0d/60/400d6029ffd827e7466fed8378439048.png"> </a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
